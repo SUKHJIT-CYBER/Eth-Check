@@ -1,0 +1,89 @@
+
+<!-- In myapp/templates/myapp/index.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eth-Check App</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .dark-mode {
+        background-color: #343a40;
+        color: white;
+    }
+    .dark-mode .btn-primary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        ...
+        .form-group {
+            animation-duration: 1s;
+            animation-name: slidein;
+        }
+    
+        @keyframes slidein {
+            from {
+                margin-left: 100%;
+                width: 300%;
+            }
+    
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
+    
+</style>
+<button id="dark-mode-toggle" class="btn btn-secondary">Toggle dark mode</button>
+
+<script>
+    document.getElementById('dark-mode-toggle').onclick = function() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    document.getElementById('my-form').onsubmit = function() {
+        this.classList.add('animate__animated', 'animate__bounceIn');
+    }
+</script>
+<body>
+    <div class="container">
+        <h1>Ethereum Balance and Transactions 🤍</h1>
+        <h3>Type any Ethereum Address and Get Insights about <b>Balance</b> and Recent <b>Transactions</b></h3>
+        <img src="{% static 'download (5).png' %}" alt="logo" />
+        <form method="post" id="my-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="address" placeholder="Enter Ethereum address" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Fetch</button>
+        </form>
+        
+        {% if balance %}
+            <p><b>Balance</b>: {{ balance }}</p>
+            <h2>Transactions Count: {{transaction_count}}</h2>
+            <h2>Transactions:</h2>
+            <ul class="list-group">
+                {% for transaction in transactions %}
+                    <li class="list-group-item"><b>From</b>: {{ transaction.from }} <b>To</b>: {{ transaction.to }} Value: {{ transaction.value }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    
+
+    <script>
+        document.getElementById('dark-mode-toggle').onclick = function() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html> 
