@@ -70,11 +70,11 @@ def transaction(request):
     if request.method == 'POST':
         address = request.POST['address']
         address = Web3.to_checksum_address(address) # convert to checksum format
-        w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/d928ea8bb2e84b5c821bf72fe222b96d'))
+        w3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/{Infura-API-Key}'))
 
         balance = w3.eth.get_balance(address)
         transaction_count = w3.eth.get_transaction_count(address)
-        url = f'http://api.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&sort=desc&apikey=C3Z7GEDX8Z7DA3I6A38XJFYNPZNMBS75XN'
+        url = f'http://api.etherscan.io/api?module=account&action=txlist&address={address}&startblock=0&endblock=99999999&sort=desc&apikey=Your-etherscan-api'
         response = requests.get(url)
         data = json.loads(response.text)
         transactions = data['result'][:5]
