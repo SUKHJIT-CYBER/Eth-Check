@@ -25,8 +25,7 @@ SECRET_KEY = "django-insecure-)cjmzk@m=)zmtj27u_(oo%i0c!!vb!s8(6%4@bd-!-$a+6l1jf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-]
+ALLOWED_HOSTS = ['.vercel.app']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://sukhjit-cyber-urban-rotary-phone-gvppx9vx6jhw96q-8000.preview.app.github.dev'
